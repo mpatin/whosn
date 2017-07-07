@@ -106,11 +106,23 @@ app.post('/events/create', function(req, res) {
 });
 
 app.post('/events/respond/:id', function(req, res) {
-  var newResponse = {
-    "name": req.body.name,
-    "io": req.body.io,
-    "comments": req.body.comments
+  console.log(req.body.comments);
+  if (req.body.comments === '') {
+    var newResponse = {
+      "name": req.body.name,
+      "io": req.body.io
+    }
   }
+  else {
+    var newResponse = {
+      "name": req.body.name,
+      "io": req.body.io,
+      "comments": req.body.comments
+    }
+  }
+
+  console.log(newResponse)
+
   var params = {
     TableName: 'Events',
     Key: {
