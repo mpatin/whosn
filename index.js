@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var randomstring = require("randomstring");
 var app = express();
 var router = express.Router();
 
@@ -71,11 +72,19 @@ app.get('/events/:id', function(req, res) {
 });
 
 app.post('/events/create', function(req, res) {
-  console.log(req.body);
+  // *************************
+  // need to add check here to make sure id doesn't already exist
+  // *************************
+  let id = randomstring.generate({
+    length: 3,
+    capitalization: 'lowercase'
+  });
+
+  console.log(id);
   var params = {
     TableName: "Events",
     Item: {
-      "id": req.body.id,
+      "id": id,
       "name": req.body.name,
       "location": req.body.location,
       "time": req.body.time,
@@ -91,7 +100,7 @@ app.post('/events/create', function(req, res) {
       console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
     } else {
       console.log("Added item:", JSON.stringify(data, null, 2));
-        res.redirect('/events');
+      res.redirect('/events');
     }
   });
 });
