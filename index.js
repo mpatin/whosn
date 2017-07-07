@@ -91,7 +91,7 @@ app.post('/events/create', function(req, res) {
       console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
     } else {
       console.log("Added item:", JSON.stringify(data, null, 2));
-      res.redirect('/events');
+        res.redirect('/events');
     }
   });
 });
