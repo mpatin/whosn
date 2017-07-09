@@ -1,0 +1,15 @@
+{
+  "name": "material-kit",
+  "homepage": "https://github.com/timcreative/material-kit",
+  "version": "1.1.0",
+  "_release": "1.1.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.1.0",
+    "commit": "17a0920a17f04db04908a6fa7163707c1c39d011"
+  },
+  "_source": "https://github.com/timcreative/material-kit.git",
+  "_target": "^1.1.0",
+  "_originalSource": "material-kit",
+  "_direct": true
+}

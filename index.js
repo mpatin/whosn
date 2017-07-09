@@ -23,6 +23,9 @@ app.use(bodyParser.urlencoded({
  */
 app.use(bodyParser.json());
 
+// check for static files (css, js, img) in assets directory
+app.use(express.static('assets'))
+
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
