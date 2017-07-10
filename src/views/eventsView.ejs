@@ -1,9 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- head -->
-<% include ./partials/head %>
-  <!-- /head -->
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Whosn - The quickest way to find out who's in!</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+	<!--     Fonts and icons     -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+	<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
+
+	<!-- CSS Files -->
+	<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/lib/material-kit/assets/css/material-kit.css" rel="stylesheet" />
+
+</head>
 
   <body>
 
@@ -22,7 +39,6 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th>ID</th>
                   <th>What</th>
                   <th>Where</th>
                   <th>When</th>
@@ -34,11 +50,8 @@
                   <tr>
                     <td>
                       <a href="/events/<%=events[i].id%>">
-                        <%=events[i].id%>
+                        <%=events[i].name%>
                       </a>
-                    </td>
-                    <td>
-                      <%=events[i].name%>
                     </td>
                     <td>
                       <%=events[i].location%>
@@ -53,31 +66,39 @@
                   <% } %>
               </tbody>
             </table>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Create New Event</h3>
+              </div>
+              <form action="/events/create" method="post">
+                <div class="col-sm-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Name</label>
+                    <input name="name" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Location</label>
+                    <input name="location" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Time/Date</label>
+                    <input name="time" type="text" class="form-control">
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group label-floating">
+                    <label class="control-label">Creator</label>
+                    <input name="creator" type="text" class="form-control">
+                  </div>
+                </div>
+                <input class="btn btn-success" type="submit" style="width: 100%" value="Create" />
+              </form>
+            </div>
 
-            <h3>Create New Event</h3>
-            <form action="/events/create" method="post">
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">What</span>
-                <input name="name" type="text" class="form-control" placeholder="Name of Event" aria-describedby="basic-addon1">
-              </div>
-              <br>
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">Where</span>
-                <input name="location" type="text" class="form-control" placeholder="Location" aria-describedby="basic-addon1">
-              </div>
-              <br>
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">When</span>
-                <input name="time" type="text" class="form-control" placeholder="Date and Time" aria-describedby="basic-addon1">
-              </div>
-              <br>
-              <div class="input-group">
-                <span class="input-group-addon" id="basic-addon1">Creator</span>
-                <input name="creator" type="text" class="form-control" placeholder="Name of Creator" aria-describedby="basic-addon1">
-              </div>
-              <br>
-              <input class="btn btn-primary" type="submit" style="width: 100%" value="Create" />
-            </form>
           </div>
         </div>
         <!-- footer -->
@@ -85,3 +106,7 @@
           <!-- /footer -->
 
   </body>
+
+  <!-- bottom -->
+  <% include ./partials/bottom %>
+    <!-- /bottom -->

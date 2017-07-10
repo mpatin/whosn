@@ -94,7 +94,7 @@ app.post('/events/create', function(req, res) {
       "creator": req.body.creator,
       "participants": [{
         "name": req.body.creator,
-        "io": "in"
+        "io": "In"
       }]
     }
   };
