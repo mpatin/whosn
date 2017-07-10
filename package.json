@@ -16,5 +16,12 @@
     "express": "^4.15.3",
     "handlebars": "^4.0.10",
     "randomstring": "^1.1.5"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.4",
+    "gulp-nodemon": "^2.2.1",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1"
   }
 }

@@ -10,3 +10,4 @@ dynamodb
 npm
 bower
 gulp
+jshint

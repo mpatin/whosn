@@ -1,12 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var randomstring = require("randomstring");
+var randomstring = require('randomstring');
 var app = express();
 var router = express.Router();
 
-var AWS = require("aws-sdk");
+var AWS = require('aws-sdk');
 
-AWS.config.update({ region: "us-east-1" });
+AWS.config.update({region: 'us-east-1'});
 
 var docClient = new AWS.DynamoDB.DocumentClient();
 
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 // check for static files (css, js, img) in assets directory
-app.use(express.static('assets'))
+app.use(express.static('assets'));
 
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
@@ -32,7 +32,7 @@ app.set('view engine', 'ejs');
 app.get('/events', function(req, res) {
 
   var params = {
-    TableName: "Events",
+    TableName: 'Events',
   };
 
   docClient.scan(params, onScan);
@@ -157,7 +157,7 @@ app.get('/', function(req, res) {
   res.render('indexView');
 });
 
-const port = 3000;
+var port = process.env.PORT || 3000;
 
 var server = app.listen(port, function() {
   console.log('Express is listening on port ' + port);

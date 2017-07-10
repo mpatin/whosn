@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <% include ./partials/head %>
+</head>
+
+<body class="container">
+
+  <header>
+    <% include ./partials/header %>
+  </header>
+
+  <main>
+
+    <div class="page-header">
+      <h1>Events</h1>
+  </div>
+    <div class="panel panel-default">
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>What</th>
+            <th>Where</th>
+            <th>When</th>
+            <th>Creator</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i<events.length; i++){ %>
+            <tr>
+              <td>
+                <a href="/events/<%=events[i].id%>">
+                  <%=events[i].id%>
+                </a>
+              </td>
+              <td>
+                <%=events[i].name%>
+              </td>
+              <td>
+                <%=events[i].location%>
+              </td>
+              <td>
+                <%=events[i].time%>
+              </td>
+              <td>
+                <%=events[i].creator%>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+
+
+    <h4>Create New Event</h4>
+    <form action="/events/create" method="post">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">What</span>
+        <input name="name" type="text" class="form-control" placeholder="Name of Event" aria-describedby="basic-addon1">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Where</span>
+        <input name="location" type="text" class="form-control" placeholder="Location" aria-describedby="basic-addon1">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">When</span>
+        <input name="time" type="text" class="form-control" placeholder="Date and Time" aria-describedby="basic-addon1">
+      </div>
+      <br>
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Creator</span>
+        <input name="creator" type="text" class="form-control" placeholder="Name of Creator" aria-describedby="basic-addon1">
+      </div>
+      <br>
+      <input class="btn btn-primary" type="submit" style="width: 100%" value="Create" />
+    </form>
+    <br>
+  </main>
+
+  <footer>
+    <% include ./partials/footer %>
+  </footer>
+
+</body>
+
+</html>
