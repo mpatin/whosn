@@ -22,91 +22,114 @@
 
 </head>
 
-  <body>
+<body>
 
-    <!-- navbar -->
-    <% include ./partials/navbar %>
-      <!-- /navbar -->
+	<!-- navbar -->
+	<% include ./partials/navbar %>
+		<!-- /navbar -->
 
-      <div class="wrapper">
-        <div style="height: 150px">
+		<div class="wrapper">
+			<div style="height: 150px">
 
-        </div>
+			</div>
 
-        <div class="main main-raised">
-          <div class="container">
-            <h2>Events</h2>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>What</th>
-                  <th>Where</th>
-                  <th>When</th>
-                  <th>Creator</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% for(var i=0; i<events.length; i++){ %>
-                  <tr>
-                    <td>
-                      <a href="/events/<%=events[i].id%>">
-                        <%=events[i].name%>
-                      </a>
-                    </td>
-                    <td>
-                      <%=events[i].location%>
-                    </td>
-                    <td>
-                      <%=events[i].time%>
-                    </td>
-                    <td>
-                      <%=events[i].creator%>
-                    </td>
-                  </tr>
-                  <% } %>
-              </tbody>
-            </table>
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title">Create New Event</h3>
-              </div>
-              <form action="/events/create" method="post">
-                <div class="col-sm-6">
-                  <div class="form-group label-floating">
-                    <label class="control-label">Name</label>
-                    <input name="name" type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group label-floating">
-                    <label class="control-label">Location</label>
-                    <input name="location" type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group label-floating">
-                    <label class="control-label">Time/Date</label>
-                    <input name="time" type="text" class="form-control">
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group label-floating">
-                    <label class="control-label">Creator</label>
-                    <input name="creator" type="text" class="form-control">
-                  </div>
-                </div>
-                <input class="btn btn-success" type="submit" style="width: 100%" value="Create" />
-              </form>
-            </div>
+			<div class="main main-raised">
+				<div class="container">
 
-          </div>
-        </div>
-        <!-- footer -->
-        <% include ./partials/footer %>
-          <!-- /footer -->
+					<div class="row">
+						<div class="col-xs-8">
+							<h2>Events</h2>
+						</div>
+						<div class="col-xs-4">
+							<button class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="float: right; margin-top:25px">
+			          Create Event
+			        </button>
+						</div>
 
-  </body>
+				</div>
 
-  <!-- bottom -->
-  <% include ./partials/bottom %>
-    <!-- /bottom -->
+
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>What</th>
+								<th>Where</th>
+								<th>When</th>
+								<th>Creator</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% for(var i=0; i<events.length; i++){ %>
+								<tr>
+									<td>
+										<a href="/events/<%=events[i].id%>">
+											<%=events[i].name%>
+										</a>
+									</td>
+									<td>
+										<%=events[i].location%>
+									</td>
+									<td>
+										<%=events[i].time%>
+									</td>
+									<td>
+										<%=events[i].creator%>
+									</td>
+								</tr>
+								<% } %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<!-- footer -->
+			<% include ./partials/footer %>
+				<!-- /footer -->
+
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="material-icons">clear</i>
+				</button>
+								<h4 class="modal-title">Create New Event</h4>
+							</div>
+							<div class="modal-body">
+								<form action="/events/create" method="post">
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Name</label>
+											<input name="name" type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Location</label>
+											<input name="location" type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Time/Date</label>
+											<input name="time" type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Creator</label>
+											<input name="creator" type="text" class="form-control">
+										</div>
+									</div>
+									<input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Create" />
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+</body>
+
+<!-- bottom -->
+<% include ./partials/bottom %>
+	<!-- /bottom -->

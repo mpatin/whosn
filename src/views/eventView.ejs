@@ -47,7 +47,7 @@
           <h2><%=event.name%></h2>
 
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Event Information</h3>
@@ -77,60 +77,63 @@
                 </div>
               </div>
 
-              <div class="col-md-6">
+              <div class="col-md-4">
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Responses</h3>
                   </div>
                   <ul class="list-group">
-                    <li class="list-group-item">
-                      <b>In:</b>
-                      <%=inCount%>
+                    <li class="list-group-item text-success">
+                      <h2>In: <b><%=inCount%></b></h2>
                     </li>
-                    <li class="list-group-item">
-                      <b>Out:</b>
-                      <%=outCount%>
+                    <li class="list-group-item text-danger">
+                    <h2>Out: <b><%=outCount%></b></h2>
                     </li>
                   </ul>
                 </div>
               </div>
+
+              <div class="col-md-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Add Response</h3>
+                </div>
+                <form action="/events/respond/<%=event.id%>" method="post">
+                  <div class="col-sm-8">
+                    <div class="form-group label-floating">
+                      <label class="control-label">Name</label>
+                      <input name="name" type="text" class="form-control">
+                    </div>
+                  </div>
+                  <div class="col-sm-2">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" value="In" name="io" checked="true">In
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                <input type="radio" value="Out" name="io">
+                Out
+              </label>
+                    </div>
+                  </div>
+                  <div class="col-sm-11">
+                    <div class="form-group label-floating">
+                      <label class="control-label">Comments (optional)</label>
+                      <input name="comments" type="text" class="form-control">
+                    </div>
+                  </div>
+                  <input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Create" />
+                </form>
+              </div>
+            </div>
+
             </div>
 
 
 
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Add Response</h3>
-            </div>
-            <form action="/events/respond/<%=event.id%>" method="post">
-              <div class="col-sm-4">
-                <div class="form-group label-floating">
-                  <label class="control-label">Name</label>
-                  <input name="name" type="text" class="form-control">
-                </div>
-              </div>
-              <div class="col-sm-1">
-                <div class="radio">
-                  <label>
-                    <input type="radio" value="In" name="io" checked="true">In
-                  </label>
-                </div>
-                <div class="radio">
-                  <label>
-            <input type="radio" value="Out" name="io">
-            Out
-          </label>
-                </div>
-              </div>
-              <div class="col-sm-7">
-                <div class="form-group label-floating">
-                  <label class="control-label">Comments (optional)</label>
-                  <input name="comments" type="text" class="form-control">
-                </div>
-              </div>
-              <input class="btn btn-success" type="submit" style="width: 100%" value="Create" />
-            </form>
-          </div>
+
 
           <div class="panel panel-default">
             <div class="panel-heading">
@@ -145,8 +148,10 @@
                 </tr>
               </thead>
               <tbody>
+                <% var rowColor; %>
                 <% for(var i=0; i<event.participants.length; i++){ %>
-                  <tr>
+                  <% if (event.participants[i].io==="In") { rowColor = 'text-success' } else { rowColor = 'text-danger' } %>
+                  <tr class="<%=rowColor%>">
                     <td>
                       <%=event.participants[i].name%>
                     </td>
@@ -165,17 +170,6 @@
 
         </div>
       </div>
-
-      <ul class="list-group">
-        <li class="list-group-item">
-          <b>In:</b>
-          <%=inCount%>
-        </li>
-        <li class="list-group-item">
-          <b>Out:</b>
-          <%=outCount%>
-        </li>
-      </ul>
 
       <footer class="footer">
         <div class="container">
