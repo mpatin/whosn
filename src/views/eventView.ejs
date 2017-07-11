@@ -28,6 +28,12 @@
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
         <a class="logo" href="/"><img src="../img/whosn-logo-white.png" alt="WhosN Logo" height="50"></a>
       </div>
 
@@ -38,188 +44,187 @@
           </li>
           <li>
             <a href="https://twitter.com/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-              <i class="fa fa-twitter"></i>
-            </a>
+            <i class="fa fa-twitter"></i>
+          </a>
           </li>
           <li>
             <a href="https://www.facebook.com/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-              <i class="fa fa-facebook-square"></i>
-            </a>
+            <i class="fa fa-facebook-square"></i>
+          </a>
           </li>
           <li>
             <a href="https://www.instagram.com/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
-              <i class="fa fa-instagram"></i>
-            </a>
+            <i class="fa fa-instagram"></i>
+          </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-
-    <!-- counting the number of in and out responses -->
-    <!-- TEMPORARY: TO BE MOVED -->
-    <% var inCount=0; var outCount=0; %>
+  <!-- counting the number of in and out responses -->
+  <!-- TEMPORARY: TO BE MOVED -->
+  <% var inCount=0; var outCount=0; %>
     <% for(var i=0; i<event.participants.length; i++){ %>
       <% if (event.participants[i].io==="In") { inCount+=1 } else { outCount+=1} %>
-    <% } %>
+        <% } %>
 
-    <div class="wrapper">
-      <div style="height: 150px">
+          <div class="wrapper">
+            <div style="height: 150px">
 
-      </div>
+            </div>
 
 
 
-      <div class="main main-raised">
-        <div class="container">
-          <h2><%=event.name%></h2>
+            <div class="main main-raised">
+              <div class="container">
+                <h2><%=event.name%></h2>
 
-            <div class="row">
-              <div class="col-md-4">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Event Information</h3>
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Event Information</h3>
+                      </div>
+                      <ul class="list-group">
+                        <li class="list-group-item">
+                          <b>Id:</b>
+                          <%=event.id%>
+                        </li>
+                        <li class="list-group-item">
+                          <b>Name:</b>
+                          <%=event.name%>
+                        </li>
+                        <li class="list-group-item">
+                          <b>Location:</b>
+                          <%=event.location%>
+                        </li>
+                        <li class="list-group-item">
+                          <b>Event:</b>
+                          <%=event.time%>
+                        </li>
+                        <li class="list-group-item">
+                          <b>Creator:</b>
+                          <%=event.creator%>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
-                  <ul class="list-group">
-                    <li class="list-group-item">
-                      <b>Id:</b>
-                      <%=event.id%>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Name:</b>
-                      <%=event.name%>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Location:</b>
-                      <%=event.location%>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Event:</b>
-                      <%=event.time%>
-                    </li>
-                    <li class="list-group-item">
-                      <b>Creator:</b>
-                      <%=event.creator%>
-                    </li>
-                  </ul>
-                </div>
-              </div>
 
-              <div class="col-md-4">
+                  <div class="col-md-4">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Responses</h3>
+                      </div>
+                      <ul class="list-group">
+                        <li class="list-group-item text-success">
+                          <h2>In: <b><%=inCount%></b></h2>
+                        </li>
+                        <li class="list-group-item text-danger">
+                          <h2>Out: <b><%=outCount%></b></h2>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">Add Response</h3>
+                      </div>
+                      <form action="/events/respond/<%=event.id%>" method="post">
+                        <div class="col-sm-8">
+                          <div class="form-group label-floating">
+                            <label class="control-label">Name</label>
+                            <input name="name" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <div class="col-sm-2">
+                          <div class="radio">
+                            <label>
+                        <input type="radio" value="In" name="io" checked="true">In
+                      </label>
+                          </div>
+                          <div class="radio">
+                            <label>
+                <input type="radio" value="Out" name="io">
+                Out
+              </label>
+                          </div>
+                        </div>
+                        <div class="col-sm-11">
+                          <div class="form-group label-floating">
+                            <label class="control-label">Comments (optional)</label>
+                            <input name="comments" type="text" class="form-control">
+                          </div>
+                        </div>
+                        <input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Create" />
+                      </form>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+
+
                 <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Responses</h3>
                   </div>
-                  <ul class="list-group">
-                    <li class="list-group-item text-success">
-                      <h2>In: <b><%=inCount%></b></h2>
-                    </li>
-                    <li class="list-group-item text-danger">
-                    <h2>Out: <b><%=outCount%></b></h2>
-                    </li>
-                  </ul>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>In/Out</th>
+                        <th>Comments</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% var rowColor; %>
+                        <% for(var i=0; i<event.participants.length; i++){ %>
+                          <% if (event.participants[i].io==="In") { rowColor = 'text-success' } else { rowColor = 'text-danger' } %>
+                            <tr class="<%=rowColor%>">
+                              <td>
+                                <%=event.participants[i].name%>
+                              </td>
+                              <td>
+                                <%=event.participants[i].io%>
+                              </td>
+                              <td>
+                                <%=event.participants[i].comments%>
+                              </td>
+                            </tr>
+                            <% } %>
+                    </tbody>
+                  </table>
                 </div>
-              </div>
 
-              <div class="col-md-4">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Add Response</h3>
-                </div>
-                <form action="/events/respond/<%=event.id%>" method="post">
-                  <div class="col-sm-8">
-                    <div class="form-group label-floating">
-                      <label class="control-label">Name</label>
-                      <input name="name" type="text" class="form-control">
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div class="radio">
-                      <label>
-                        <input type="radio" value="In" name="io" checked="true">In
-                      </label>
-                    </div>
-                    <div class="radio">
-                      <label>
-                <input type="radio" value="Out" name="io">
-                Out
-              </label>
-                    </div>
-                  </div>
-                  <div class="col-sm-11">
-                    <div class="form-group label-floating">
-                      <label class="control-label">Comments (optional)</label>
-                      <input name="comments" type="text" class="form-control">
-                    </div>
-                  </div>
-                  <input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Create" />
-                </form>
+
               </div>
             </div>
 
-            </div>
-
-
-
-
-
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h3 class="panel-title">Responses</h3>
-            </div>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>In/Out</th>
-                  <th>Comments</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% var rowColor; %>
-                <% for(var i=0; i<event.participants.length; i++){ %>
-                  <% if (event.participants[i].io==="In") { rowColor = 'text-success' } else { rowColor = 'text-danger' } %>
-                  <tr class="<%=rowColor%>">
-                    <td>
-                      <%=event.participants[i].name%>
-                    </td>
-                    <td>
-                      <%=event.participants[i].io%>
-                    </td>
-                    <td>
-                      <%=event.participants[i].comments%>
-                    </td>
-                  </tr>
-                  <% } %>
-              </tbody>
-            </table>
-          </div>
-
-
-        </div>
-      </div>
-
-      <footer class="footer">
-        <div class="container">
-          <nav class="pull-left">
-            <ul>
-              <li>
-                <a href="/">
+            <footer class="footer">
+              <div class="container">
+                <nav class="pull-left">
+                  <ul>
+                    <li>
+                      <a href="/">
                     About Us
                   </a>
-              </li>
-              <li>
-                <a href="/">
+                    </li>
+                    <li>
+                      <a href="/">
                     Tech Stack
                   </a>
-              </li>
-            </ul>
-          </nav>
-          <div class="copyright pull-right">
-            &copy; 2017, made by Mitchell Patin
-          </div>
-        </div>
-      </footer>
+                    </li>
+                  </ul>
+                </nav>
+                <div class="copyright pull-right">
+                  &copy; 2017, made by Mitchell Patin
+                </div>
+              </div>
+            </footer>
 
 </body>
 
