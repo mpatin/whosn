@@ -67,7 +67,7 @@ app.get('/events/:id', function(req, res) {
       console.error('Unable to read item. Error JSON:', JSON.stringify(err, null, 2));
     } else {
       console.log('GetItem succeeded:', JSON.stringify(data, null, 2));
-      res.render('eventView', {
+      res.render('singleEventView', {
         event: data.Item
       });
     }
@@ -151,6 +151,9 @@ app.post('/events/respond/:id', function(req, res) {
   });
 });
 
+app.get('/about', function(req, res) {
+  res.render('aboutView');
+});
 
 app.get('/', function(req, res) {
   res.render('indexView');

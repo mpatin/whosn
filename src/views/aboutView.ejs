@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="apple-touch-icon" sizes="76x76" href="img/apple-icon.png">
+	<link rel="icon" type="image/png" href="img/favicon.png">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+	<title>Whosn - About</title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+
+	<!--     Fonts and icons     -->
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" />
+	<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css" />
+
+	<!-- CSS Files -->
+	<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="/lib/material-kit/assets/css/material-kit.css" rel="stylesheet" />
+
+</head>
+
+<body>
+
+	<!-- navbar -->
+	<% include ./partials/navbar %>
+		<!-- /navbar -->
+
+		<div class="wrapper">
+			<div style="height: 150px">
+
+			</div>
+
+			<div class="main main-raised">
+				<div class="container">
+
+					<div class="row">
+						<div class="col-xs-8">
+							<h2>About</h2>
+						</div>
+					</div>
+
+					<ul>
+						<li>node</li>
+						<li>ejs</li>
+						<li>dynamodb</li>
+						<li>npm</li>
+						<li>bower</li>
+						<li>gulp</li>
+						<li>jshint</li>
+					</ul>
+
+
+
+				</div>
+			</div>
+			<!-- footer -->
+			<% include ./partials/footer %>
+				<!-- /footer -->
+
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					<i class="material-icons">clear</i>
+				</button>
+								<h4 class="modal-title">Create New Event</h4>
+							</div>
+							<div class="modal-body">
+								<form action="/events/create" method="post">
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Name</label>
+											<input name="name" type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Location</label>
+											<input name="location" type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Time/Date</label>
+											<input name="time" type="text" class="form-control">
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Creator</label>
+											<input name="creator" type="text" class="form-control">
+										</div>
+									</div>
+									<input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Create" />
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+</body>
+
+<!-- bottom -->
+<% include ./partials/bottom %>
+	<!-- /bottom -->
