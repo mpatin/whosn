@@ -7,7 +7,7 @@
   <link rel="icon" type="image/png" href="img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-  <title>Whosn - The quickest way to find out who's in!</title>
+  <title>WhosN - The quickest way to find out who's in!</title>
 
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
 
@@ -24,9 +24,37 @@
 
 <body>
 
-  <!-- navbar -->
-  <% include ./partials/navbar %>
-    <!-- /navbar -->
+  <nav class="navbar navbar-fixed-top">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <a class="logo" href="/"><img src="../img/whosn-logo-white.png" alt="WhosN Logo" height="50"></a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navigation-example">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a href="/events">Events</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.facebook.com/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+              <i class="fa fa-facebook-square"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.instagram.com/" target="_blank" class="btn btn-simple btn-white btn-just-icon">
+              <i class="fa fa-instagram"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
 
     <!-- counting the number of in and out responses -->
     <!-- TEMPORARY: TO BE MOVED -->
