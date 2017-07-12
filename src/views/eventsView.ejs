@@ -19,7 +19,9 @@
 	<!-- CSS Files -->
 	<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="/lib/material-kit/assets/css/material-kit.css" rel="stylesheet" />
-
+	<style>
+		.datepicker{z-index:1151 !important;}
+	</style>
 </head>
 
 <body>
@@ -53,9 +55,10 @@
 					<table class="table">
 						<thead>
 							<tr>
-								<th>What</th>
-								<th>Where</th>
-								<th>When</th>
+								<th>Event</th>
+								<th>Location</th>
+								<th>Date</th>
+								<th>Time</th>
 								<th>Creator</th>
 							</tr>
 						</thead>
@@ -69,6 +72,9 @@
 									</td>
 									<td>
 										<%=events[i].location%>
+									</td>
+									<td>
+										<%=events[i].date%>
 									</td>
 									<td>
 										<%=events[i].time%>
@@ -111,7 +117,17 @@
 									</div>
 									<div class="col-sm-6">
 										<div class="form-group label-floating">
-											<label class="control-label">Time/Date</label>
+											<label class="control-label">Date</label>
+											<!-- <input name="time" type="text" class="form-control"> -->
+											<% var date = new Date(); %>
+											<% var n = date.toLocaleDateString(); %>
+
+											<input name="date" class="datepicker form-control" type="text" value="<%=n%>" data-date-format="m/d/yyyy";/>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group label-floating">
+											<label class="control-label">Time</label>
 											<input name="time" type="text" class="form-control">
 										</div>
 									</div>
@@ -129,7 +145,6 @@
 				</div>
 
 </body>
-
 <!-- bottom -->
 <% include ./partials/bottom %>
 	<!-- /bottom -->

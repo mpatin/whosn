@@ -84,12 +84,15 @@ app.post('/events/create', function(req, res) {
   });
 
   console.log(id);
+  console.log(req.body.name);
+  console.log(req.body.time);
   var params = {
     TableName: 'Events',
     Item: {
       'id': id,
       'name': req.body.name,
       'location': req.body.location,
+      'date': req.body.date,
       'time': req.body.time,
       'creator': req.body.creator,
       'participants': [{
