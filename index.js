@@ -46,6 +46,7 @@ app.get('/events', function(req, res) {
       data.Items.forEach(function(event) {
         events.push(event);
       });
+      console.log(events);
       res.render('eventsView', {
         events: events
       });
@@ -83,9 +84,6 @@ app.post('/events/create', function(req, res) {
     capitalization: 'lowercase'
   });
 
-  console.log(id);
-  console.log(req.body.name);
-  console.log(req.body.time);
   var params = {
     TableName: 'Events',
     Item: {

@@ -24,6 +24,7 @@ var params = {
         "id": id,
         "name": name,
         "location": location,
+        "date": date,
         "time": time,
         "creator": creator,
         "participants": [{
