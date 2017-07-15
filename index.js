@@ -91,7 +91,7 @@ app.post('/events/create', function(req, res) {
       'name': req.body.name,
       'location': req.body.location,
       'date': req.body.date,
-      'time': req.body.time,
+      'time': req.body.hour + ":" + req.body.min + " " + req.body.ampm,
       'creator': req.body.creator,
       'participants': [{
         'name': req.body.creator,
