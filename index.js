@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var randomstring = require('randomstring');
+var nodemailer = require('nodemailer');
 var app = express();
 var router = express.Router();
 
@@ -91,7 +92,7 @@ app.post('/events/create', function(req, res) {
       'name': req.body.name,
       'location': req.body.location,
       'date': req.body.date,
-      'time': req.body.hour + ":" + req.body.min + " " + req.body.ampm,
+      'time': req.body.hour + ':' + req.body.min + '' + req.body.ampm,
       'creator': req.body.creator,
       'participants': [{
         'name': req.body.creator,
@@ -148,6 +149,49 @@ app.post('/events/respond/:id', function(req, res) {
     } else {
       console.log('UpdateItem succeeded:', JSON.stringify(data, null, 2));
       res.redirect('/events/'+req.params.id);
+    }
+  });
+});
+
+app.get('/admin/:id', function(req, res) {
+
+  var params = {
+    TableName: 'Events',
+    Key: {
+      'id': req.params.id
+    }
+  };
+
+  docClient.get(params, function(err, data) {
+    if (err) {
+      console.error('Unable to read item. Error JSON:', JSON.stringify(err, null, 2));
+    } else {
+      console.log('GetItem succeeded:', JSON.stringify(data, null, 2));
+                        var transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: 'whosn.mailer@gmail.com',
+                      pass: 'Whosn51dfwn'
+                    }
+                  });
+
+                  var mailOptions = {
+                    from: 'whosn.mailer@gmail.com',
+                    to: 'mitchell.patin@gmail.com',
+                    subject: 'Sending Email using Node.js',
+                    text: 'That was easy!'
+                  };
+
+                  transporter.sendMail(mailOptions, function(error, info){
+                    if (error) {
+                      console.log(error);
+                    } else {
+                      console.log('Email sent: ' + info.response);
+                    }
+                  });
+      res.render('singleEventView', {
+        event: data.Item
+      });
     }
   });
 });
