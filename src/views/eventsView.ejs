@@ -99,6 +99,7 @@
 							</div>
 							<div class="modal-body">
 								<form action="/events/create" method="post">
+									<div class="row">
 									<div class="col-sm-6">
 										<div class="form-group label-floating">
 											<label class="control-label">Name</label>
@@ -111,7 +112,9 @@
 											<input name="location" type="text" class="form-control">
 										</div>
 									</div>
-									<div class="col-sm-4">
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
 										<div class="form-group label-floating">
 											<label class="control-label">Date</label>
 											<!-- <input name="time" type="text" class="form-control"> -->
@@ -121,7 +124,7 @@
 											<input name="date" class="datepicker form-control" type="text" value="<%=n%>" data-date-format="m/d/yyyy";/>
 										</div>
 									</div>
-									<div class="col-sm-4">
+									<div class="col-sm-6">
 										<div class="form-group label-floating">
 											<label class="control-label">Time</label>
 											<div style="height:28px; padding-top:8px; margin-top:1px;">
@@ -158,17 +161,25 @@
 												<option value="pm" selected="selected">pm</option>
 											</select>
 										</div>
-
 									</div>
 									</div>
-									<div class="col-sm-4">
+									</div>
+									<div class="row">
+									<div class="col-sm-6">
 										<div class="form-group label-floating">
 											<label class="control-label">Creator</label>
 											<input name="creator" type="text" class="form-control">
 										</div>
 									</div>
-									<input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Create" />
-								</form>
+								<div class="col-sm-6">
+									<div class="form-group label-floating">
+										<label class="control-label">Email</label>
+										<input name="email" type="text" class="form-control">
+									</div>
+								</div>
+							</div>
+								<input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Create" />
+							</form>
 							</div>
 						</div>
 					</div>

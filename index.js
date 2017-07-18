@@ -84,16 +84,22 @@ app.post('/events/create', function(req, res) {
     length: 3,
     capitalization: 'lowercase'
   });
+  var key = randomstring.generate({
+    length: 12,
+    capitalization: 'lowercase'
+  });
 
   var params = {
     TableName: 'Events',
     Item: {
       'id': id,
+      'key': key,
       'name': req.body.name,
       'location': req.body.location,
       'date': req.body.date,
       'time': req.body.hour + ':' + req.body.min + '' + req.body.ampm,
       'creator': req.body.creator,
+      'email': req.body.email,
       'participants': [{
         'name': req.body.creator,
         'io': 'In'
@@ -105,7 +111,30 @@ app.post('/events/create', function(req, res) {
       console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2));
     } else {
       console.log('Added item:', JSON.stringify(data, null, 2));
-      res.redirect('/events');
+      res.redirect('/events/' + id);
+      var url = 'http://whosn.io/admin/' + id + '?key=' + key;
+                    var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'whosn.mailer@gmail.com',
+                  pass: 'Whosn51dfwn'
+                }
+              });
+
+              var mailOptions = {
+                from: 'whosn.mailer@gmail.com',
+                to: req.body.email,
+                subject: req.body.name,
+                text: url
+              };
+
+              transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                  console.log(error);
+                } else {
+                  console.log('Email sent: ' + info.response);
+                }
+              });
     }
   });
 });
@@ -167,31 +196,14 @@ app.get('/admin/:id', function(req, res) {
       console.error('Unable to read item. Error JSON:', JSON.stringify(err, null, 2));
     } else {
       console.log('GetItem succeeded:', JSON.stringify(data, null, 2));
-                        var transporter = nodemailer.createTransport({
-                    service: 'gmail',
-                    auth: {
-                      user: 'whosn.mailer@gmail.com',
-                      pass: 'Whosn51dfwn'
-                    }
-                  });
-
-                  var mailOptions = {
-                    from: 'whosn.mailer@gmail.com',
-                    to: 'mitchell.patin@gmail.com',
-                    subject: 'Sending Email using Node.js',
-                    text: 'That was easy!'
-                  };
-
-                  transporter.sendMail(mailOptions, function(error, info){
-                    if (error) {
-                      console.log(error);
-                    } else {
-                      console.log('Email sent: ' + info.response);
-                    }
-                  });
-      res.render('singleEventView', {
-        event: data.Item
-      });
+      if(req.query.key === data.Item.key) {
+        res.render('singleEventView', {
+          event: data.Item
+        });
+      }
+      else {
+        res.send('invalid key');
+      }
     }
   });
 });
