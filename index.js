@@ -112,7 +112,10 @@ app.post('/events/create', function(req, res) {
     } else {
       console.log('Added item:', JSON.stringify(data, null, 2));
       res.redirect('/events/' + id);
-      var url = 'http://whosn.io/admin/' + id + '?key=' + key;
+      var adminLink = 'http://whosn.io/admin/' + id + '?key=' + key;
+      var shareLink = 'http://whosn.io/events/' + id;
+      var emailText = 'Admin Access: ' + adminLink + '\n\nLink to Share: ' + shareLink;
+
                     var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -125,7 +128,7 @@ app.post('/events/create', function(req, res) {
                 from: 'whosn.mailer@gmail.com',
                 to: req.body.email,
                 subject: req.body.name,
-                text: url
+                text: emailText
               };
 
               transporter.sendMail(mailOptions, function(error, info){
@@ -206,6 +209,10 @@ app.get('/admin/:id', function(req, res) {
       }
     }
   });
+});
+
+app.get('/create', function(req, res) {
+  res.render('createView');
 });
 
 app.get('/about', function(req, res) {
