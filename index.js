@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var randomstring = require('randomstring');
-var nodemailer = require('nodemailer');
+// var nodemailer = require('nodemailer');
 var app = express();
 var router = express.Router();
 
