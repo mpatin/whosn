@@ -1,0 +1,82 @@
+<form action="/admin/<%=event.id%>?=key<%=event.key%>" method="post">
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group label-floating">
+        <label class="control-label">Name</label>
+        <input name="name" type="text" class="form-control" value="<%=event.name%>">
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group label-floating">
+        <label class="control-label">Location</label>
+        <input name="location" type="text" class="form-control" value="<%=event.location%>">
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group label-floating">
+        <label class="control-label">Date</label>
+        <!-- <input name="time" type="text" class="form-control"> -->
+        <!-- <% var date = new Date(); %>
+          <% var n = date.toLocaleDateString(); %> -->
+
+            <input name="date" class="datepicker form-control" type="text" value="<%=event.date%>" data-date-format="m/d/yyyy" ;/>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="form-group label-floating">
+        <label class="control-label">Time</label>
+        <div style="height:28px; padding-top:8px; margin-top:1px;">
+          <select id="hour" name="hour">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+          </select>:
+          <select id="min" name="min">
+            <option value="00">00</option>
+            <option value="05">05</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="30">30</option>
+            <option value="35">35</option>
+            <option value="40">40</option>
+            <option value="45">45</option>
+            <option value="50">50</option>
+            <option value="55">55</option>
+          </select>
+          <select id="ampm" name="ampm">
+            <option value="am">am</option>
+            <option value="pm">pm</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group label-floating">
+        <label class="control-label">Creator</label>
+        <input name="creator" type="text" class="form-control" value="<%=event.creator%>">
+      </div>
+    </div>
+  </div>
+  <input class="btn btn-simple btn-success" type="submit" style="width: 100%" value="Edit" />
+</form>
+
+<script>
+  document.querySelector('#hour [value="' + <%=event.hour%> + '"]').selected = true;
+  document.querySelector('#min [value="' + <%=event.min%> + '"]').selected = true;
+  document.querySelector('#ampm [value="' + '<%=event.ampm%>' + '"]').selected = true;
+</script>

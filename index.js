@@ -76,7 +76,7 @@ app.get('/events/:id', function(req, res) {
   });
 });
 
-app.post('/events/create', function(req, res) {
+app.post('/create', function(req, res) {
   // *************************
   // need to add check here to make sure id doesn't already exist
   // *************************
@@ -98,8 +98,11 @@ app.post('/events/create', function(req, res) {
       'location': req.body.location,
       'date': req.body.date,
       'time': req.body.hour + ':' + req.body.min + '' + req.body.ampm,
+      'hour': req.body.hour,
+      'min' : req.body.min,
+      'ampm' : req.body.ampm,
       'creator': req.body.creator,
-      'email': req.body.email,
+      // 'email': req.body.email,
       'participants': [{
         'name': req.body.creator,
         'io': 'In'
@@ -112,32 +115,32 @@ app.post('/events/create', function(req, res) {
     } else {
       console.log('Added item:', JSON.stringify(data, null, 2));
       res.redirect('/events/' + id);
-      var adminLink = 'http://whosn.io/admin/' + id + '?key=' + key;
-      var shareLink = 'http://whosn.io/events/' + id;
-      var emailText = 'Admin Access: ' + adminLink + '\n\nLink to Share: ' + shareLink;
-
-                    var transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                  user: 'whosn.mailer@gmail.com',
-                  pass: 'Whosn51dfwn'
-                }
-              });
-
-              var mailOptions = {
-                from: 'whosn.mailer@gmail.com',
-                to: req.body.email,
-                subject: req.body.name,
-                text: emailText
-              };
-
-              transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log('Email sent: ' + info.response);
-                }
-              });
+      // var adminLink = 'http://whosn.io/admin/' + id + '?key=' + key;
+      // var shareLink = 'http://whosn.io/events/' + id;
+      // var emailText = 'Admin Access: ' + adminLink + '\n\nLink to Share: ' + shareLink;
+      //
+      //               var transporter = nodemailer.createTransport({
+      //           service: 'gmail',
+      //           auth: {
+      //             user: 'whosn.mailer@gmail.com',
+      //             pass: 'Whosn51dfwn'
+      //           }
+      //         });
+      //
+      //         var mailOptions = {
+      //           from: 'whosn.mailer@gmail.com',
+      //           to: req.body.email,
+      //           subject: req.body.name,
+      //           text: emailText
+      //         };
+      //
+      //         transporter.sendMail(mailOptions, function(error, info){
+      //           if (error) {
+      //             console.log(error);
+      //           } else {
+      //             console.log('Email sent: ' + info.response);
+      //           }
+      //         });
     }
   });
 });
@@ -185,31 +188,62 @@ app.post('/events/respond/:id', function(req, res) {
   });
 });
 
-app.get('/admin/:id', function(req, res) {
-
-  var params = {
-    TableName: 'Events',
-    Key: {
-      'id': req.params.id
-    }
-  };
-
-  docClient.get(params, function(err, data) {
-    if (err) {
-      console.error('Unable to read item. Error JSON:', JSON.stringify(err, null, 2));
-    } else {
-      console.log('GetItem succeeded:', JSON.stringify(data, null, 2));
-      if(req.query.key === data.Item.key) {
-        res.render('singleEventView', {
-          event: data.Item
-        });
-      }
-      else {
-        res.send('invalid key');
-      }
-    }
-  });
-});
+// app.get('/admin/:id', function(req, res) {
+//
+//   var params = {
+//     TableName: 'Events',
+//     Key: {
+//       'id': req.params.id
+//     }
+//   };
+//
+//   docClient.get(params, function(err, data) {
+//     if (err) {
+//       console.error('Unable to read item. Error JSON:', JSON.stringify(err, null, 2));
+//     } else {
+//       console.log('GetItem succeeded:', JSON.stringify(data, null, 2));
+//       if(req.query.key === data.Item.key) {
+//         res.render('adminEventView', {
+//           event: data.Item
+//         });
+//       }
+//       else {
+//         res.send('invalid key');
+//       }
+//     }
+//   });
+// });
+//
+// app.post('/admin/:id', function(req, res) {
+//
+//   var params = {
+//     TableName: 'Events',
+//     Key:{
+//         'id': req.params.id
+//     },
+//     UpdateExpression: 'set name = :n, location = :location, date = :date, time = :time, hour = :hour, min = :min, ampm = :ampm, creator = :creator',
+//     ExpressionAttributeValues:{
+//       ':name': req.body.name,
+//       ':location': req.body.location,
+//       ':date': req.body.date,
+//       ':time': req.body.hour + ':' + req.body.min + '' + req.body.ampm,
+//       ':hour': req.body.hour,
+//       ':min' : req.body.min,
+//       ':ampm' : req.body.ampm,
+//       ':creator': req.body.creator,
+//     },
+//     ReturnValues:'UPDATED_NEW'
+//   };
+//   docClient.update(params, function(err, data) {
+//     if (err) {
+//       console.error('Unable to add item. Error JSON:', JSON.stringify(err, null, 2));
+//     } else {
+//       console.log('Added item:', JSON.stringify(data, null, 2));
+//       res.redirect('/admin/' + params.Item.id + '?key=' + req.query.key);
+//
+//     }
+//   });
+// });
 
 app.get('/create', function(req, res) {
   res.render('createView');
